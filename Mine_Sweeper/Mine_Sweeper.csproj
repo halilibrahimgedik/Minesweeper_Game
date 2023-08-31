@@ -172,9 +172,6 @@
     <None Include="Resources\restart1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\flag1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\soundOpen.png" />
   </ItemGroup>
   <ItemGroup>

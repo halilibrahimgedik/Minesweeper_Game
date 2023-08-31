@@ -10,9 +10,9 @@ namespace Mine_Sweeper
 {
     public class Mine
     {
-        Point MineLocation; //loc
+        Point MineLocation;
 
-        bool IsFill; //dolu   başlangıçta false olarak ayarlayalım
+        bool IsFill; //  başlangıçta false olarak ayarlayalım
 
         bool IsChecked; // oyunu kazanma durumu içinde kullanabiliriz clicked mayın sayısı == tüm mayınlar - dolu mayınlar;
 
@@ -20,7 +20,6 @@ namespace Mine_Sweeper
 
         public bool Flag;
 
-         
 
         public Mine(Point location)
         {

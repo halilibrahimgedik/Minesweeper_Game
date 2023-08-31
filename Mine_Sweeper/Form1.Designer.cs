@@ -131,7 +131,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Mine_Sweeper.Properties.Resources.flag1;
+            this.pictureBox1.Image = global::Mine_Sweeper.Properties.Resources.flag;
             this.pictureBox1.Location = new System.Drawing.Point(18, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(34, 34);

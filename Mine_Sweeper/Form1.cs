@@ -95,6 +95,7 @@ namespace Mine_Sweeper
                     if (btn.Text == "" && flag>0)
                     {
                         btn.Image = Properties.Resources.flag;
+                        btn.Tag = true;
                         btn.Click -= btn_Click;
                         m.Flag = true;
                         flag -= 1;
@@ -107,6 +108,7 @@ namespace Mine_Sweeper
                 {
                     btn.Image = Properties.Resources.button;
                     btn.Click += btn_Click;
+                    btn.Tag = false;
                     m.Flag = false;
                     flag += 1;
                 }
@@ -120,6 +122,7 @@ namespace Mine_Sweeper
             
             var user = c.Users.Find(UserID);
             Button btn = (sender as Button);
+
             Mine m = mineSweeper.GetMineAccordingToLocation(btn.Location);
             mines = new List<Mine>();
 
@@ -158,11 +161,7 @@ namespace Mine_Sweeper
                                 {
                                     btnx.Enabled = false;
                                     btnx.Image = Properties.Resources.DarkGray3;
-
                                     mine.MineIsChecked = true;
-
-                                    //mine.IsClicked = true;
-                                    //ClickedMines.Add(mine);
 
                                     AddAround(mine);
 
@@ -172,61 +171,56 @@ namespace Mine_Sweeper
                                         m.IsAddedScore = true;
                                     }
                                 }
-                                // etrafında sayı varsa
-                                else
+                                else // etrafında sayı varsa
                                 {
                                     var number2 = HowManyMinesOnAround(mine);
+                                    btnx.Font = new Font("Tahoma", 10F, FontStyle.Bold);
+                                    btnx.Image= Properties.Resources.button;
 
-                                    if (number2 == 1)
+                                    switch (number2)
                                     {
-                                        btnx.ForeColor = Color.Black;
-                                        btnx.Font = new Font("Tahoma", 10F, FontStyle.Bold);
-                                    }
-                                    else if (number2 == 2)
-                                    {
-                                        btnx.ForeColor = Color.Green;
-                                        btnx.Font = new Font("Tahoma", 10F, FontStyle.Bold);
-                                    }
-                                    else
-                                    {
-                                        btnx.ForeColor = Color.Red;
-                                        btnx.Font = new Font("Tahoma", 10F, FontStyle.Bold);
+                                        case 1:
+                                            btnx.ForeColor = Color.Black;
+                                            break;
+                                        case 2:
+                                            btnx.ForeColor = Color.Green;
+                                            break;
+                                        default:
+                                            btnx.ForeColor = Color.Red;
+                                            break;
                                     }
 
                                     btnx.Text = number2.ToString();
                                     score++;
-
                                 }
                                 
                                 labelScoreText.Text=score.ToString();
-                                //---
                                 mine.MineIsChecked = true;
                                 clickedMines.Add(mine); 
-
                             }
-
                         }
-
                     }
                 }
                 else // butonun(mayının) etrafında 0 dan fazla mayın varsa
                 {
                     btn.Font = new Font("Tahoma", 10F, FontStyle.Bold);
                     btn.MouseUp -= btn_MouseUp;
-                    btn.Image = Properties.Resources.button;
+                    btn.Click -= btn_Click;
                     m.IsAddedScore = true;
 
-                    if (number == 1)
+                    switch (number)
                     {
-                        btn.ForeColor = Color.Black;
-                    }
-                    else if (number == 2)
-                    {
-                        btn.ForeColor = Color.Green;
-                    }
-                    else
-                    {
-                        btn.ForeColor = Color.Red;
+                        case 1: 
+                            btn.ForeColor = Color.Black;
+                            break;
+
+                        case 2:
+                            btn.ForeColor = Color.Green;
+                            break;  
+                            
+                        default:
+                            btn.ForeColor = Color.Red;
+                        break;
                     }
 
                     if (m.IsAddedScore==false)
@@ -287,8 +281,8 @@ namespace Mine_Sweeper
       
         public int HowManyMinesOnAround(Mine m)
         {
-            //int adjacentFlag = 0;
             int number = 0;
+
             if (m.GetLocation.X > 0)
             {
                 if (mineSweeper.GetMineAccordingToLocation(new Point(m.GetLocation.X - 30, m.GetLocation.Y)).IsThereMine)
