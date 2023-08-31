@@ -93,7 +93,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.labelSec);
             this.panel2.Controls.Add(this.labelMin);
-            this.panel2.Location = new System.Drawing.Point(31, 32);
+            this.panel2.Location = new System.Drawing.Point(12, 32);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(449, 50);
             this.panel2.TabIndex = 10;

@@ -48,7 +48,7 @@ namespace Mine_Sweeper
             MineList.Add(m);
         }
 
-        public Mine GetMineAccordingToLocation(Point loc) //mayin_al_loc
+        public Mine GetMineAccordingToLocation(Point loc) 
         {
             foreach (Mine m in MineList)
             {
@@ -83,12 +83,10 @@ namespace Mine_Sweeper
             }
         }
 
-
         public int AllArea
         {
             get
             {
-                //return /*(_field.Width * _field.Height) / 30*/;
                 return 100;
             }
         }

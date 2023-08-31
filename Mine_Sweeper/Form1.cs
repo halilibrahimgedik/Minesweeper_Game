@@ -92,9 +92,10 @@ namespace Mine_Sweeper
                 if (e.Button == MouseButtons.Right)
                 {
                     // btn.Text boş ise bayrak koyalım dolu ise koymayalım
-                    if (btn.Text == "")
+                    if (btn.Text == "" && flag>0)
                     {
                         btn.Image = Properties.Resources.flag;
+                        btn.Click -= btn_Click;
                         m.Flag = true;
                         flag -= 1;
                     }
@@ -105,6 +106,7 @@ namespace Mine_Sweeper
                 if (e.Button == MouseButtons.Right)
                 {
                     btn.Image = Properties.Resources.button;
+                    btn.Click += btn_Click;
                     m.Flag = false;
                     flag += 1;
                 }
@@ -115,6 +117,7 @@ namespace Mine_Sweeper
 
         public void btn_Click(object sender, EventArgs e)
         {
+            
             var user = c.Users.Find(UserID);
             Button btn = (sender as Button);
             Mine m = mineSweeper.GetMineAccordingToLocation(btn.Location);
@@ -208,33 +211,22 @@ namespace Mine_Sweeper
                 }
                 else // butonun(mayının) etrafında 0 dan fazla mayın varsa
                 {
+                    btn.Font = new Font("Tahoma", 10F, FontStyle.Bold);
+                    btn.MouseUp -= btn_MouseUp;
+                    btn.Image = Properties.Resources.button;
+                    m.IsAddedScore = true;
 
                     if (number == 1)
                     {
                         btn.ForeColor = Color.Black;
-                        btn.Font = new Font("Tahoma", 10F, FontStyle.Bold);
-                        btn.MouseUp -= btn_MouseUp;
-                        btn.Image = Properties.Resources.button;
-                        m.IsAddedScore = true;
-                        
                     }
                     else if (number == 2)
                     {
                         btn.ForeColor = Color.Green;
-                        btn.Font = new Font("Tahoma", 10F, FontStyle.Bold);
-                        btn.MouseUp -= btn_MouseUp;
-                        btn.Image = Properties.Resources.button;
-                        m.IsAddedScore = true;
-
                     }
                     else
                     {
                         btn.ForeColor = Color.Red;
-                        btn.Font = new Font("Tahoma", 10F, FontStyle.Bold);
-                        btn.MouseUp -= btn_MouseUp;
-                        btn.Image = Properties.Resources.button;
-
-                        m.IsAddedScore = true;
                     }
 
                     if (m.IsAddedScore==false)
@@ -252,7 +244,6 @@ namespace Mine_Sweeper
                         clickedMines.Add(m);
                     }
                 }
-                
             }
 
             RecordScore(); // Kullanıcının skorunu oyunu kaybetsede tutuyoruz ama süreyi tutmayacağız (yani kazanırsa süre tutacağız) 
@@ -296,11 +287,13 @@ namespace Mine_Sweeper
       
         public int HowManyMinesOnAround(Mine m)
         {
+            //int adjacentFlag = 0;
             int number = 0;
             if (m.GetLocation.X > 0)
             {
                 if (mineSweeper.GetMineAccordingToLocation(new Point(m.GetLocation.X - 30, m.GetLocation.Y)).IsThereMine)
                 {
+                    
                     number++;
                   
                 }
@@ -443,7 +436,9 @@ namespace Mine_Sweeper
             clickedMines = new List<Mine>();
 
             timer1.Start();
-            score = 0;
+
+            ClearTxtScore();
+
             gameMode = "Easy";
             panel1.Enabled = true;
 
@@ -471,8 +466,9 @@ namespace Mine_Sweeper
             clickedMines = new List<Mine>();
 
             timer1.Start();
-            score = 0;
-            labelScoreText.Text = score.ToString();
+
+            ClearTxtScore();
+
             gameMode = "Medium";
             panel1.Enabled = true;
 
@@ -500,13 +496,15 @@ namespace Mine_Sweeper
             clickedMines = new List<Mine>();
 
             timer1.Start();
-            score = 0;
-            labelScoreText.Text= score.ToString();
+
+            ClearTxtScore();
+
             gameMode = "Hard";
             panel1.Enabled = true;
+            
             ClearTimer();
-            if (isPlaying)
-            {
+
+            if (isPlaying){
                 backGroundplayer.Play();
                 pictureBoxSound.Image = Properties.Resources.soundOpen;
             }
@@ -526,8 +524,8 @@ namespace Mine_Sweeper
         {
             clickedMines = new List<Mine>();
 
-            score = 0;
-            labelScoreText.Text = score.ToString();
+            ClearTxtScore();
+
             panel1.Enabled = true;
 
             ClearTimer();
@@ -624,7 +622,7 @@ namespace Mine_Sweeper
             frm.Show();
         }
 
-        public void RecordScore()
+        private void RecordScore()
         {
             var user = c.Users.Find(UserID);
             // eski skor ile yeni skoru karşılaştırma ;
@@ -646,5 +644,12 @@ namespace Mine_Sweeper
 
             c.SaveChanges();
         }
+
+        private void ClearTxtScore()
+        {
+            score = 0;
+            labelScoreText.Text = score.ToString();
+        }
+
     }
 }
