@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Mine_Sweeper
@@ -18,11 +11,9 @@ namespace Mine_Sweeper
         }
 
         Context c = new Context();
-        //public int _userId;
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            
 
             if (textBoxPassword.Text==textBoxRepassword.Text)
             {
@@ -32,14 +23,11 @@ namespace Mine_Sweeper
 
                 c.Users.Add(user);
                 c.SaveChanges();
-
-                //_userId = user.UserId;
                 
-
                 MessageBox.Show("You have Registered Successfuly");
 
                 Form1 frm = new Form1();
-                frm._userID= user.UserId;
+                frm.UserID= user.UserId;
                 this.Hide();
                 frm.Show();
             }
@@ -47,15 +35,12 @@ namespace Mine_Sweeper
             {
                 MessageBox.Show("RePassword and Password do not match ");
             }
-
-
             
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LoginForm frm = new LoginForm();
-            //frm._userId = _userId;
             this.Hide();
             frm.Show();
         }

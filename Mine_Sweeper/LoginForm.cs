@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Mine_Sweeper;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Mine_Sweeper
 {
@@ -47,7 +38,7 @@ namespace Mine_Sweeper
             else
             {
                 Form1 frm = new Form1();
-                frm._userID = user.UserId;
+                frm.UserID = user.UserId;
                 frm.Show();
                 this.Hide();
 
