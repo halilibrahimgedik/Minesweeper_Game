@@ -507,8 +507,8 @@ namespace Mine_Sweeper
             panel2.Width = this.Width;
             flag = 60;
             labelFlag.Text = flag.ToString();
+
             AddMineToPanel();
-            ShowAllMines();
         }
 
         private void btn_Restart(object sender, EventArgs e)
@@ -588,7 +588,6 @@ namespace Mine_Sweeper
             labelSec.Text = "0";
             labelMin.Text = "0";
         }
-
 
         private void yourBestScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
