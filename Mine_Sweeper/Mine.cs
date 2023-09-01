@@ -10,27 +10,24 @@ namespace Mine_Sweeper
 {
     public class Mine
     {
-        Point MineLocation;
-
-        bool IsFill; //  başlangıçta false olarak ayarlayalım
-
-        bool IsChecked; // oyunu kazanma durumu içinde kullanabiliriz clicked mayın sayısı == tüm mayınlar - dolu mayınlar;
+        private Point mineLocation;
+        private bool isFill; //  başlangıçta false olarak ayarlayalım
+        private bool isChecked; // oyunu kazanma durumu içinde kullanabiliriz clicked mayın sayısı == tüm mayınlar - dolu mayınlar;
 
         public bool IsAddedScore=false;
-
         public bool Flag;
 
 
         public Mine(Point location)
         {
-            IsFill = false;
-            MineLocation = location;
+            isFill = false;
+            mineLocation = location;
 
         }
 
         public Point GetLocation
         {
-            get { return MineLocation; }
+            get { return mineLocation; }
 
         }
 
@@ -38,21 +35,18 @@ namespace Mine_Sweeper
         {
             get
             {
-                return IsFill;
+                return isFill;
             }
             set
             {
-                IsFill = value;
+                isFill = value;
             }
         }
 
         public bool MineIsChecked
         {
-            get { return IsChecked; }
-            set
-            {
-                IsChecked = value;
-            }
+            get { return isChecked; }
+            set { isChecked = value; }
         }
 
     }

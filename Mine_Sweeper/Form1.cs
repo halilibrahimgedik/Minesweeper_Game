@@ -34,7 +34,6 @@ namespace Mine_Sweeper
             InitializeComponent();
             backGroundplayer = new SoundPlayer("Elevator.wav");
             explosionPlayer = new SoundPlayer("explosion2.wav");
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -95,7 +94,6 @@ namespace Mine_Sweeper
                     if (btn.Text == "" && flag>0)
                     {
                         btn.Image = Properties.Resources.flag;
-                        btn.Tag = true;
                         btn.Click -= btn_Click;
                         m.Flag = true;
                         flag -= 1;
@@ -108,7 +106,6 @@ namespace Mine_Sweeper
                 {
                     btn.Image = Properties.Resources.button;
                     btn.Click += btn_Click;
-                    btn.Tag = false;
                     m.Flag = false;
                     flag += 1;
                 }

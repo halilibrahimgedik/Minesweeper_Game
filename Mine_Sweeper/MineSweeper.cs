@@ -9,23 +9,17 @@ namespace Mine_Sweeper
 {
     public class MineSweeper
     {
-        Size _field;
-
-        List<Mine> MineList; // mayınlar
-
-        int _numberOfFillMine;
-
+        private Size field;
+        private List<Mine> mineList; // mayınlar
+        private readonly Random rnd = new Random();
+        private readonly int numberOfFillMine;
         
 
-        Random rnd = new Random();
-
-
-
-        public MineSweeper(Size field, int numberOfFillMine)
+        public MineSweeper(Size field, int numberOfFillMines)
         {
-            _numberOfFillMine = numberOfFillMine; // Tarladaki dolu mayın sayısını nesne oluşurken isteyelim
-            MineList = new List<Mine>();
-            _field = field;
+            numberOfFillMine = numberOfFillMines; // Tarladaki dolu mayın sayısını nesne oluşurken isteyelim
+            mineList = new List<Mine>();
+            this.field = field;
 
             for (int x = 0; x < field.Width; x += 30)
             {
@@ -40,17 +34,17 @@ namespace Mine_Sweeper
 
         public Size SizeOfMineSweeper
         {
-            get { return _field; }
+            get { return field; }
         }
 
         public void AddMine(Mine m)
         {
-            MineList.Add(m);
+            mineList.Add(m);
         }
 
         public Mine GetMineAccordingToLocation(Point loc) 
         {
-            foreach (Mine m in MineList)
+            foreach (Mine m in mineList)
             {
                 if (m.GetLocation == loc)
                 {
@@ -60,27 +54,9 @@ namespace Mine_Sweeper
             return null;
         }
 
-
         public List<Mine> GetAllMines
         {
-            get { return MineList; }
-        }
-
-        // bomba ile doldurduk mayınlarımızı
-        private void FillMines()
-        {
-            int number = 0;
-            while (number < _numberOfFillMine)
-            {
-                int i = rnd.Next(0, MineList.Count);
-                Mine item = MineList[i];
-
-                if (item.IsThereMine == false)
-                {
-                    item.IsThereMine = true;
-                    number++;
-                }
-            }
+            get { return mineList; }
         }
 
         public int AllArea
@@ -95,10 +71,25 @@ namespace Mine_Sweeper
         {
             get
             {
-                return _numberOfFillMine;
+                return numberOfFillMine;
             }
         }
 
+        //  mayınlarımızı bomba ile dolduralım
+        private void FillMines()
+        {
+            int number = 0;
+            while (number < numberOfFillMine)
+            {
+                int i = rnd.Next(0, mineList.Count);
+                Mine item = mineList[i];
 
+                if (item.IsThereMine == false)
+                {
+                    item.IsThereMine = true;
+                    number++;
+                }
+            }
+        }
     }
 }
