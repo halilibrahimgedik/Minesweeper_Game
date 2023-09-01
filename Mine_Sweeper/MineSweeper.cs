@@ -11,7 +11,7 @@ namespace Mine_Sweeper
     {
         private Size field;
         private List<Mine> mineList; // mayınlar
-        private readonly Random rnd = new Random();
+        private Random rnd = new Random();
         private readonly int numberOfFillMine;
         
 
@@ -29,6 +29,7 @@ namespace Mine_Sweeper
                     AddMine(mine);
                 }
             }
+
             FillMines();
         }
 
